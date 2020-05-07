@@ -1,8 +1,44 @@
-body {
-    background-color: blueviolet;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+body{
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
 }
 
-header {
+.logo-container{
 
-    color: white;
+    margin-top: 2em;
+
+}
+
+.input-container{
+
+    padding-top: 2em;
+
+}
+
+label{
+
+    font-size: 1.2em;
+}
+
+input[type=date] {
+    border: 1px solid #3772FF;
+    background-color: aliceblue;
+    cursor: text;
+}
+
+input[type=button]{
+    background-color: #3772FF;
+    border: none;
+    border-radius: 2em;
+    width: 4%;
+    height: 20px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input[type=button]:hover{
+    background-color: #4848ff;
+
 }
