@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 body{
     font-family: 'Roboto', sans-serif;
-    text-align: center;
+    
 }
 
 .logo-container{
 
     margin-top: 2em;
-
+    text-align: center;
 }
 
 .input-container{
 
-    padding-top: 2em;
-
+    padding-top: 1em;
+   margin-left: 2em;
 }
 
 label{
@@ -57,10 +57,17 @@ input[type=button].setCoordenadas{
     background-color: #3772FF;
     border: none;
     border-radius: 2em;
-    width: 20%;
-    height: 20px;
+    width: 200px;
+    height: 25px;
     color: #ffffff;
     font-weight: bold;
     cursor: pointer;
+    margin-left: 3em;
+}
+
+input[type=button].setCoordenadas :hover{
+    
+    background-color: #4848ff;
+ 
 }
 
