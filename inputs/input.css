@@ -14,6 +14,9 @@ body{
 
     padding-top: 1em;
    margin-left: 2em;
+   display: flex;
+   flex-direction: row;
+   
 }
 
 label{
@@ -31,7 +34,7 @@ input[type=button]{
     background-color: #3772FF;
     border: none;
     border-radius: 2em;
-    width: 4%;
+    width: 33px;
     height: 20px;
     color: #ffffff;
     font-weight: bold;
@@ -71,3 +74,11 @@ input[type=button].setCoordenadas :hover{
  
 }
 
+.clock{
+    
+    
+    font-size: 1.2em;
+    align-items: center;
+    text-align: center;
+
+}
