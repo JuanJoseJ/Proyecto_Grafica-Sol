@@ -11,23 +11,29 @@
     <header class="logo-container">
         <img class = "logo" src="./logo.svg"/>
     </header>
+
+    <div id="clock" class="clock"></div>
+
     <div class="input-container">
         <form action="">
             <label for="Date">Date: </label>
             <input type="date" id="Date" name="Date">
-            <input type="button" value="Set">
         </form>
-        <div id="clock" class="clock"></div>
+        <form action="" class="Time">
+            <label for="Time">Time: </label>
+            <input type="time" id="Time" name="Time">
+        </form>
     </div>
+
     <div class="contenedorLatitudLongitud">
         <div class="input-container">
             <form action="">
                 <label for="Latitud">Latitud: </label>
-                <input type="number" id="Latitud" name="Latitud">
+                <input type="number" id="LatitudGrados" name="Latitud">
                 <text>°</text>
-                <input type="number" id="Latitud" name="Latitud">
+                <input type="number" id="LatitudMinutos" name="Latitud">
                 <text>'</text>
-                <input type="number" id="Latitud" name="Latitud">
+                <input type="number" id="LatitudSegundos" name="Latitud">
                 <text>"</text>
                 <div>
                     <input type="radio">
@@ -37,14 +43,15 @@
                 </div>
             </form>
         </div>
+
         <div class="input-container">
             <form action="">
                 <label for="Longitud">Longitud: </label>
-                <input type="number" id="Longitud" name="Longitud">
+                <input type="number" id="LongitudGrados" name="Longitud">
                 <text>°</text>
-                <input type="number" id="Longitud" name="Longitud">
+                <input type="number" id="LongitudMinutos" name="Longitud">
                 <text>'</text>
-                <input type="number" id="Longitud" name="Longitud">
+                <input type="number" id="LongitudSegundos" name="Longitud">
                 <text>"</text>
                 <div>
                     <input type="radio">
@@ -55,7 +62,7 @@
                
             </form>
         </div>
-         <input class="setCoordenadas" type="button" value="Set Coordinates">
+         <input class="setAll" type="button" onclick="logConsole()" value="Set">
     </div>
 
     <script src="./inputs.js"></script>
