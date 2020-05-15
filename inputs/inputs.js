@@ -1,3 +1,27 @@
+let inputDate = document.getElementById("Date");
+let inputTime = document.getElementById("Time");
+let inputLatitudGrados = document.getElementById("LatitudGrados");
+let inputLatitudMinutos = document.getElementById("LatitudMinutos");
+let inputLatitudSegundos = document.getElementById("LatitudSegundos");
+let inputLongitudGrados = document.getElementById("LongitudGrados");
+let inputLongitudMinutos = document.getElementById("LongitudMinutos");
+let inputLongitudSegundos = document.getElementById("LongitudSegundos");
+
+let fecha = new Date(inputDate.value + " " + inputTime.value);
+let latitud = () => {
+
+}
+
+function logConsole() {
+
+
+  // la fecha devuelve un objeto de tipo date --> dia mes(resumido) nDia ano hora:minuto:segundos zona horaria (de donde es)
+  console.log(fecha);
+  console.log(inputDate.value );
+  console.log(inputTime.value);
+}
+
+ 
 //funcion que me dara el transcurso del tiempo 
 
 
@@ -30,46 +54,5 @@ function updateTime(k) {
     }
 }
 
-
-
-function logConsole() {
-
-  var inputDate = document.getElementById("Date");
-  var inputTime = document.getElementById("Time");
-  // var inputLatitudGrados = document.getElementById("LatitudGrados");
-  // var inputLatitudMinutos = document.getElementById("LatitudMinutos");
-  // var inputLatitudSegundos = document.getElementById("LatitudSegundos");
-  // var inputLongitudGrados = document.getElementById("LongitudGrados");
-  // var inputLongitudMinutos = document.getElementById("LongitudMinutos");
-  // var inputLongitudSegundos = document.getElementById("LongitudSegundos");
-
-  console.log(typeof inputDate.value);
-  let fecha = inputDate.value;
-  console.log(escrituraFecha(fecha));
-  console.log(inputDate.value );
-  console.log(inputTime.value);
-
-
-}
-
-let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", 
-            "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-
-function escrituraFecha( fecha ){
-  let nuevaFecha = "";
-  for (let index = 0; index < fecha.length; index++) {
-    if(fecha[index] == "-"){
-
-      nuevaFecha += ",";
-
-    }else{
-
-      nuevaFecha += fecha[index];
-
-    }
-  }
-  return nuevaFecha;
-}
-  
 watchTime();
 logConsole();
