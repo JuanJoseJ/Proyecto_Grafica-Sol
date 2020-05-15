@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+body{
+    font-family: 'Roboto', sans-serif;
+    
+}
+
+.logo-container{
+
+    margin-top: 2em;
+    text-align: center;
+}
+
+.input-container{
+
+    padding-top: 1em;
+   margin-left: 2em;
+   display: flex;
+   flex-direction: column;
+   
+}
+
+label{
+
+    font-size: 1.2em;
+}
+
+input[type=date] {
+    border: 1px solid #3772FF;
+    background-color: aliceblue;
+    cursor: text;
+}
+
+input[type=time] {
+    border: 1px solid #3772FF;
+    background-color: aliceblue;
+    cursor: text;
+}
+
+
+input[type=number]{
+    border: 1px solid #3772FF;
+    background-color: aliceblue;
+    cursor: text;
+    width: 2em;
+
+}
+
+
+input[type=button].setAll{
+    margin-top: 1em;
+    background-color: #3772FF;
+    border: none;
+    border-radius: 2em;
+    width: 200px;
+    height: 25px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 3em;
+}
+
+input[type=button].setAll :hover{
+    
+    background-color: #4848ff;
+ 
+}
+
+.clock{
+    
+    
+    font-size: 1.2em;
+    align-items: center;
+    text-align: center;
+
+}
+
+.Time{
+    padding-top: 16px;
+}
