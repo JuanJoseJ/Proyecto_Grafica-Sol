@@ -5,84 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shadow</title>
     <style>
-        body {
-          margin: 0;
-        }
-    
-        canvas {
-          display: block;
-        }
+        body { margin: 0; }
+        canvas { display: block; }
       </style>
     <link rel="stylesheet" href="input.css">
 </head>
+
 <body>
-    
-    <header class="logo-container">
-        <img class = "logo" src="./logo.svg"/>
-    </header>
 
-    <div id="clock" class="clock"></div>
-
-    <div class="input-container">
-        <form action="">
-            <label for="Date">Date: </label>
-            <input type="date" id="Date" name="Date">
-        </form>
-        <form action="" class="Time">
-            <label for="Time">Time: </label>
-            <input type="time" id="Time" name="Time">
-        </form>
-    </div>
-
-    <div class="contenedorLatitudLongitud">
-        <div class="input-container">
-            <form action="">
-                <label for="Latitud">Latitud: </label>
-                <input type="number" id="LatitudGrados" name="Latitud">
-                <text>°</text>
-                <input type="number" id="LatitudMinutos" name="Latitud">
-                <text>'</text>
-                <input type="number" id="LatitudSegundos" name="Latitud">
-                <text>"</text>
-                <div>
-                    <form action="">
-                        <input type="radio" id="norte" name="cardinalidadLatitud" value="norte">
-                        <label for="norte">N</label>
-                        <input type="radio" id="sur" name="cardinalidad" value="sur">
-                        <label for="sur">S</label>
-                    </form>
-                </div>
-            </form>
-        </div>
-
-        <div class="input-container">
-            <form action="">
-                <label for="Longitud">Longitud: </label>
-                <input type="number" id="LongitudGrados" name="Longitud">
-                <text>°</text>
-                <input type="number" id="LongitudMinutos" name="Longitud">
-                <text>'</text>
-                <input type="number" id="LongitudSegundos" name="Longitud">
-                <text>"</text>
-                <div>
-                    <form action="">
-                        <input type="radio" id="este" name="cardinalidadLongitud" value="este">
-                        <label for="este">E</label>
-                        <input type="radio" id="oeste" name="cardinalidadLongitud" value="oeste">
-                        <label for="oeste">O</label>
-                    </form>
-                </div>
-               
-            </form>
-        </div>
-         <input class="setAll" type="button" onclick="logConsole()" value="Set">
-    </div>
-
-    <script src="./inputs.js"></script>
     <script src="three.js-dev/build/three.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.6.4/math.js"></script>
     <script src="three.js-dev/examples/js/controls/OrbitControls.js"></script>
     <script src="example.js"></script>
+
+    <div class="contenedorThreeJs">
     
+        <header class="logo-container">
+            <img class = "logo" src="./logo.svg"/>
+        </header>
+
+        <div id="clock" class="clock"></div>
+
+        <div class="contenedor-inputs">
+            
+            <div class="input-container-fecha-hora">
+                <form action="">
+                    <label for="Date">Date: </label>
+                    <input type="date" id="Date" name="Date">
+                </form>
+                <form action="" class="Time">
+                    <label for="Time">Time: </label>
+                    <input type="time" id="Time" name="Time">
+                </form>
+            </div>
+
+            <div class="contenedorLatitudLongitud">
+                <div class="input-container-latitud">
+                    <form action="">
+                        <label for="Latitud">Latitud: </label>
+                        <input type="number" id="LatitudGrados" name="Latitud">
+                        <text>°</text>
+                        <input type="number" id="LatitudMinutos" name="Latitud">
+                        <text>'</text>
+                        <input type="number" id="LatitudSegundos" name="Latitud">
+                        <text>"</text>
+                        <div>
+                            <form action="">
+                                <input type="radio" id="norte" name="cardinalidadLatitud" value="norte">
+                                <label for="norte">N</label>
+                                <input type="radio" id="sur" name="cardinalidad" value="sur">
+                                <label for="sur">S</label>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="input-container-longitud">
+                    <form action="">
+                        <label for="Longitud">Longitud: </label>
+                        <input type="number" id="LongitudGrados" name="Longitud">
+                        <text>°</text>
+                        <input type="number" id="LongitudMinutos" name="Longitud">
+                        <text>'</text>
+                        <input type="number" id="LongitudSegundos" name="Longitud">
+                        <text>"</text>
+                        <div>
+                            <form action="">
+                                <input type="radio" id="este" name="cardinalidadLongitud" value="este">
+                                <label for="este">E</label>
+                                <input type="radio" id="oeste" name="cardinalidadLongitud" value="oeste">
+                                <label for="oeste">O</label>
+                            </form>
+                        </div>
+               
+                    </form>
+                </div>
+                <input class="setAll" type="button" onclick="logConsole()" value="Set">
+            </div>
+        </div>
+    </div>
+    <script src="./inputs.js"></script>
+
+
 </body>
 </html>  

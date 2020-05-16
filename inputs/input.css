@@ -1,27 +1,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 body{
     font-family: 'Roboto', sans-serif;
     
 }
 
-.logo-container{
-
-    margin-top: 2em;
-    text-align: center;
+.contenedorThreeJs{
+    position: absolute;
+	top: 10px;
+	width: 100%;
+	z-index: 100;
+	display:block;
 }
 
-.input-container{
 
-    padding-top: 1em;
-   margin-left: 2em;
-   display: flex;
-   flex-direction: column;
+.logo-container{
+    
+    text-align: center;
+    margin-top: 2px;
+    
+    
+}
+
+.clock{
+
+    position: absolute center;
+    font-size: 1.2em;
+    text-align: center;
+
+
+}
+
+.contenedor-inputs{
+
+    display: flex;
+    flex: content;
+    border-width: 20px;
+    border-color: black;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-left: 1em;
    
+        
+
+}
+
+.input-container-fecha-hora{
+    
+    padding-top: 1em;
+    flex-direction: column;
+        
+}
+
+.input-container-latitud{
+    
+    padding-top: 1em;
+    flex-direction: column;
+   
+    
+}
+
+.input-container-longitud{
+    
+    padding-top: 1em;
+    flex-direction: column;
+    
 }
 
 label{
-
-    font-size: 1.2em;
+    
+    font-size: 15px;
 }
 
 input[type=date] {
@@ -46,7 +94,7 @@ input[type=number]{
 }
 
 
-input[type=button].setAll{
+input[type=button]{
     margin-top: 1em;
     background-color: #3772FF;
     border: none;
@@ -56,24 +104,23 @@ input[type=button].setAll{
     color: #ffffff;
     font-weight: bold;
     cursor: pointer;
-    margin-left: 3em;
+    
 }
 
-input[type=button].setAll :hover{
+input[type=button]:hover{
     
     background-color: #4848ff;
  
 }
 
-.clock{
-    
-    
-    font-size: 1.2em;
-    align-items: center;
-    text-align: center;
 
-}
 
 .Time{
     padding-top: 16px;
 }
+
+.logo{
+    width: 250px;
+    
+}
+
