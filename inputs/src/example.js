@@ -44,8 +44,8 @@ cube.receiveShadow = false; //default
 scene.add(cube);
 
 
-var texture = new THREE.TextureLoader().load('piso.jpg');
-var texture2 = new THREE.TextureLoader().load('sol.png');
+var texture = new THREE.TextureLoader().load('./styles/assets/piso.jpg');
+var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.png');
 
 // immediately use the texture for material creation
 var material2 = new THREE.MeshLambertMaterial({ map: texture });
