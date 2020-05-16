@@ -1,7 +1,8 @@
 var scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0xcce0ff, 500, 10000);
 
-scene.background = new THREE.Color(0xcccccc);
+// scene.background = new THREE.Color(0xcccccc);
+scene.background = new THREE.Color(0xb3d1ff);
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
 
 var renderer = new THREE.WebGLRenderer();
@@ -13,10 +14,14 @@ document.body.appendChild(renderer.domElement);
 
 
 controls = new THREE.OrbitControls(camera, renderer.domElement);
-camera.position.set(0, 20, 100);
+// camera.position.set(0, 20, 100);
+camera.position.set(-2.2507412289962487, 234.7144596484875, 258.62585054188287);
 controls.update();
-
 controls.maxPolarAngle = (Math.PI - 0.01) / 2;
+
+// function mostrarPosicionCamara(){
+//     console.log(camera.position)
+// }
 
 
 window.addEventListener('resize', onWindowResize, false);
