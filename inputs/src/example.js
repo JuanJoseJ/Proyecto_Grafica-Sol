@@ -37,7 +37,7 @@ function coordSol(fecha, lon, lat){
     }
     //coordenadas rectangulares
     let x,y,z,factor; //sen y cos dan un valor entre -1 y 1, factor es para escalar esa distancia
-    factor=100; //Hay que ponerle un numero grande
+    factor=500; //Hay que ponerle un numero grande
     x=Math.cos(A); //Direccion Norte
     y=Math.sin(A); //Direccion oriente
     z=Math.sin(h); //Altura
@@ -145,7 +145,7 @@ scene.add(cube);
 
 
 var texture = new THREE.TextureLoader().load('./styles/assets/piso.jpg');
-var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.jpg');
+var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.png');
 var texture3 = new THREE.TextureLoader().load('./styles/assets/reloj2.jpg');
 
 // immediately use the texture for material creation
@@ -178,7 +178,7 @@ scene.add(sphere);
 
 
 
-var directionalLight = new THREE.DirectionalLight(0xffffff, 7);
+var directionalLight = new THREE.DirectionalLight(0xffffff, 4);
 directionalLight.castShadow = true;
 scene.add(directionalLight);
 directionalLight.shadow.mapSize.width = 512;  // default
@@ -199,8 +199,8 @@ directionalLight.position.set(luzX, luzY, luzZ)
 
 sphere.position.set(luzX, luzY, luzZ)
 
-var helper = new THREE.CameraHelper(directionalLight.shadow.camera);
-scene.add(helper);
+//var helper = new THREE.CameraHelper(directionalLight.shadow.camera);
+//scene.add(helper);
 
 function animate() {
     requestAnimationFrame(animate);
@@ -231,9 +231,9 @@ function enviarInputs(){
     let positionSun = coordSol(fecha,lon,lat)
 
     console.log(positionSun);
-    directionalLight.position.set(positionSun[0],positionSun[1],positionSun[2]); //Cambio la posicion del objeto de la luz
-    sphere.position.set(positionSun[0],positionSun[1],positionSun[2]); //Cambio posicion de la esfera
-    console.log(luzX);
+    directionalLight.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio la posicion del objeto de la luz
+    sphere.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio posicion de la esfera
+    console.log(positionSun[0]);
 
     let cambio = document.getElementById("run");
     console.log(cambio.value)
