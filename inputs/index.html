@@ -42,44 +42,19 @@
                 <div class="input-container-latitud">
                     <form action="">
                         <label for="Latitud">Latitud: </label>
-                        <input type="number" id="LatitudGrados" name="Latitud">
+                        <input type="number" id="LatitudGrados" name="Latitud" class="latitud">
                         <text>°</text>
-                        <input type="number" id="LatitudMinutos" name="Latitud">
-                        <text>'</text>
-                        <input type="number" id="LatitudSegundos" name="Latitud">
-                        <text>"</text>
-                        <div>
-                            <form action="">
-                                <input type="radio" id="norte" name="cardinalidadLatitud" value="norte">
-                                <label for="norte">N</label>
-                                <input type="radio" id="sur" name="cardinalidad" value="sur">
-                                <label for="sur">S</label>
-                            </form>
-                        </div>
                     </form>
                 </div>
 
                 <div class="input-container-longitud">
                     <form action="">
                         <label for="Longitud">Longitud: </label>
-                        <input type="number" id="LongitudGrados" name="Longitud">
+                        <input type="number" id="LongitudGrados" name="Longitud", class="longitud">
                         <text>°</text>
-                        <input type="number" id="LongitudMinutos" name="Longitud">
-                        <text>'</text>
-                        <input type="number" id="LongitudSegundos" name="Longitud">
-                        <text>"</text>
-                        <div>
-                            <form action="">
-                                <input type="radio" id="este" name="cardinalidadLongitud" value="este">
-                                <label for="este">E</label>
-                                <input type="radio" id="oeste" name="cardinalidadLongitud" value="oeste">
-                                <label for="oeste">O</label>
-                            </form>
-                        </div>
-               
                     </form>
                 </div>
-                <input class="setAll" type="button" onclick="mostrarPosicionCamara()" value="Set">
+                <input class="setAll" type="button" onclick="logConsole()" value="Set">
             </div>
         </div>
     </div>

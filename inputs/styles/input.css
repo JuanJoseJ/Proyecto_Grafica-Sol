@@ -82,15 +82,24 @@ input[type=time] {
     border: 1px solid #3772FF;
     background-color: aliceblue;
     cursor: text;
+    width: 10em;
 }
 
 
-input[type=number]{
+input[type=number].longitud{
     border: 1px solid #3772FF;
     background-color: aliceblue;
     cursor: text;
-    width: 2em;
+    width: 8em;
+   
+}
 
+input[type=number].latitud{
+    border: 1px solid #3772FF;
+    background-color: aliceblue;
+    cursor: text;
+    width: 9em;
+   
 }
 
 

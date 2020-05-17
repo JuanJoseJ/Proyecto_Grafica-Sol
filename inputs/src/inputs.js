@@ -1,16 +1,17 @@
 let inputDate = document.getElementById("Date");
 let inputTime = document.getElementById("Time");
+
 let inputLatitudGrados = document.getElementById("LatitudGrados");
-let inputLatitudMinutos = document.getElementById("LatitudMinutos");
-let inputLatitudSegundos = document.getElementById("LatitudSegundos");
+
+
 let inputLongitudGrados = document.getElementById("LongitudGrados");
-let inputLongitudMinutos = document.getElementById("LongitudMinutos");
-let inputLongitudSegundos = document.getElementById("LongitudSegundos");
+
 
 let fecha = new Date(inputDate.value + " " + inputTime.value);
-let latitud = () => {
 
-}
+
+
+
 
 function logConsole() {
 
@@ -19,6 +20,9 @@ function logConsole() {
   console.log(fecha);
   console.log(inputDate.value );
   console.log(inputTime.value);
+  console.log(inputLatitudGrados.value);
+  console.log(inputLongitudGrados.value);
+ 
 }
 
  

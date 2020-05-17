@@ -75,14 +75,14 @@ directionalLight.shadow.camera.far = 2000;
 var light = new THREE.AmbientLight(0x404040); // soft white light
 scene.add(light);
 
-var luzX = 20
+var luzX = 70
 var luzY = 25
 var luzZ = 500
 
 
     directionalLight.position.set(luzX, luzY, luzZ)
 
-sphere.position.set(luzX, luzY, 10)
+sphere.position.set(luzX, luzY, luzZ)
 
 // var helper = new THREE.CameraHelper(directionalLight.shadow.camera);
 // scene.add(helper);
@@ -90,8 +90,14 @@ function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
     controls.update();
-    sphere.rotation.y += 0.01
+    sphere.rotation.y += 0.01;
+    sphere.position.x += 0.1;
+    sphere.position.y += 0.1;
+    sphere.position.z += 0.1;
+
     
+
+    directionalLight.position.set(luzX += 0.1, luzY, luzZ);
 }
 
 animate();
