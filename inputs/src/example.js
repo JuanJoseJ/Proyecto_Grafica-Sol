@@ -1,26 +1,6 @@
 //browser-sync start --server --files "*.html, *.js"    
 var alfa,delta,eps,lam,L,g,n,date,T,gst,A,H,h,fi,lon,lat;
 
-function enviarInputs(){
-    
-    let inputDate = document.getElementById("Date");
-    let inputTime = document.getElementById("Time");
-
-    let inputLatitudGrados = document.getElementById("LatitudGrados");
-
-
-    let inputLongitudGrados = document.getElementById("LongitudGrados");
-
-    var fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
-
-    console.log(fecha);
-    console.log(coordSol(fecha, parseInt(inputLongitudGrados.value,10) ,parseInt(inputLatitudGrados.value,10)));
-    
-    let cambio = document.getElementById("run");
-    console.log(cambio.value)
-    watchTime(inputDate.value, fecha, cambio.value);
-}
-
 function coordSol(fecha, lon, lat){
 
     //date = new Date('03-01-2020-16:00:00 GMT-0500'); //Meter aquí la fecha
@@ -165,8 +145,8 @@ scene.add(cube);
 
 
 var texture = new THREE.TextureLoader().load('./styles/assets/piso.jpg');
-var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.png');
-var texture3 = new THREE.TextureLoader().load('./styles/assets/reloj2.png');
+var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.jpg');
+var texture3 = new THREE.TextureLoader().load('./styles/assets/reloj2.jpg');
 
 // immediately use the texture for material creation
 var material2 = new THREE.MeshLambertMaterial({ map: texture });
@@ -174,7 +154,8 @@ var material2 = new THREE.MeshLambertMaterial({ map: texture });
 var geometry2 = new THREE.PlaneGeometry(800, 800, 100, 100)
 //var material2 = new THREE.MeshLambertMaterial({ color: 0xebe4da, side: THREE.DoubleSide })
 var plane = new THREE.Mesh(geometry2, material2);
-plane.rotation.x = -90 * Math.PI / 180
+plane.rotation.x = -90 * Math.PI / 180;
+
 plane.receiveShadow = true;
 scene.add(plane);
 
@@ -182,8 +163,10 @@ var materialReloj = new THREE.MeshLambertMaterial({ map: texture3 });
 
 var geometry4 = new THREE.PlaneGeometry(80, 80, 100, 100)
 //var material2 = new THREE.MeshLambertMaterial({ color: 0xebe4da, side: THREE.DoubleSide })
+
 var plane2 = new THREE.Mesh(geometry4, materialReloj);
 plane2.rotation.x = -90 * Math.PI / 180
+plane2.position.y=0.5;
 plane2.receiveShadow = true;
 scene.add(plane2);
 
@@ -207,17 +190,18 @@ scene.add(light);
 
 
 
-//var luzX = 70
-//var luzY = 25
-//var luzZ = -500
+var luzX = 70
+var luzY = 25
+var luzZ = -500
 
 
 directionalLight.position.set(luzX, luzY, luzZ)
 
 sphere.position.set(luzX, luzY, luzZ)
 
-// var helper = new THREE.CameraHelper(directionalLight.shadow.camera);
-// scene.add(helper);
+var helper = new THREE.CameraHelper(directionalLight.shadow.camera);
+scene.add(helper);
+
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
@@ -229,3 +213,29 @@ function animate() {
 }
 
 animate();
+
+function enviarInputs(){
+    
+    let inputDate = document.getElementById("Date");
+    let inputTime = document.getElementById("Time");
+
+    let inputLatitudGrados = document.getElementById("LatitudGrados");
+
+    let inputLongitudGrados = document.getElementById("LongitudGrados");
+
+    var fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
+
+    console.log(fecha);
+    let lon=parseInt(inputLongitudGrados.value,10);
+    let lat=parseInt(inputLatitudGrados.value,10);
+    let positionSun = coordSol(fecha,lon,lat)
+
+    console.log(positionSun);
+    directionalLight.position.set(positionSun[0],positionSun[1],positionSun[2]); //Cambio la posicion del objeto de la luz
+    sphere.position.set(positionSun[0],positionSun[1],positionSun[2]); //Cambio posicion de la esfera
+    console.log(luzX);
+
+    let cambio = document.getElementById("run");
+    console.log(cambio.value)
+    watchTime(inputDate.value, fecha, cambio.value);
+}
