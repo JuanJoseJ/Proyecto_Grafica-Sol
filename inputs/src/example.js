@@ -38,12 +38,12 @@ function coordSol(fecha, lon, lat) {
     //coordenadas rectangulares
     let x,y,z,factor; //sen y cos dan un valor entre -1 y 1, factor es para escalar esa distancia
     factor=500; //Hay que ponerle un numero grande
-    x=Math.cos(A); //Direccion Norte
-    y=Math.sin(A); //Direccion oriente
+    x=Math.cos(A)*Math.cos(h); //Direccion Norte
+    y=Math.sin(A)*Math.cos(h); //Direccion oriente
     z=Math.sin(h); //Altura
 
     
-    return [x*factor,y*factor,z*factor];
+    return [x*factor,-y*factor,z*factor];
     //return [h*(180/pi),A*(180/pi)]; //coordenadas horizontales en grados
 }
 
@@ -112,7 +112,6 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 //camera.position.z = 100;
 
-
 controls = new THREE.OrbitControls(camera, renderer.domElement);
 // camera.position.set(0, 20, 100);
 camera.position.set(-2.2507412289962487, 234.7144596484875, 258.62585054188287);
@@ -123,7 +122,6 @@ controls.maxPolarAngle = (Math.PI - 0.01) / 2;
 //     console.log(camera.position)
 // }
 
-
 window.addEventListener('resize', onWindowResize, false);
 function onWindowResize() {
 
@@ -133,7 +131,6 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 
 }
-
 
 var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
 var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
@@ -166,35 +163,31 @@ var geometry4 = new THREE.PlaneGeometry(200, 200, 100, 100)
 
 var plane2 = new THREE.Mesh(geometry4, materialReloj);
 plane2.rotation.x = -90 * Math.PI / 180
+plane2.rotation.z = 90 * Math.PI / 180
 plane2.position.y = 0.5;
-plane2.position.z = -45;
+plane2.position.x = -45;
 plane2.receiveShadow = true;
 scene.add(plane2);
-
 
 var geometry3 = new THREE.SphereGeometry(10, 32, 32);
 var material3 = new THREE.MeshBasicMaterial({ color: 0xffff00, map: texture2 });
 var sphere = new THREE.Mesh(geometry3, material3);
 scene.add(sphere);
 
-
-
-var directionalLight = new THREE.DirectionalLight(0xffffff, 4);
+var directionalLight = new THREE.PointLight(0xffffff, 4);
 directionalLight.castShadow = true;
 scene.add(directionalLight);
-directionalLight.shadow.mapSize.width = 512;  // default
-directionalLight.shadow.mapSize.height = 512; // default
+directionalLight.shadow.mapSize.width = 2000;  // default
+directionalLight.shadow.mapSize.height = 2000; // default
 directionalLight.shadow.camera.near = 5;    // default
 directionalLight.shadow.camera.far = 2000;
 var light = new THREE.AmbientLight(0x404040); // soft white light
 scene.add(light);
-
-
+directionalLight.intensity=4;
 
 var luzX = 70
 var luzY = 25
-var luzZ = -500
-
+var luzZ = 500
 
 directionalLight.position.set(luzX, luzY, luzZ)
 
@@ -208,8 +201,6 @@ function animate() {
     renderer.render(scene, camera);
     controls.update();
     sphere.rotation.y += 0.01;
-
-
 
 }
 
@@ -232,9 +223,11 @@ function enviarInputs() {
     let positionSun = coordSol(fecha, lon, lat)
 
     console.log(positionSun);
+    directionalLight.intensity=1;
     directionalLight.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio la posicion del objeto de la luz
     sphere.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio posicion de la esfera
-    console.log(positionSun[0]);
+    
+    console.log(directionalLight.intensity);
 
     let cambio = document.getElementById("run");
     console.log(cambio.value)
