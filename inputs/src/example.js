@@ -155,10 +155,10 @@ function onWindowResize() {
 }
 
 
-var geometry = new THREE.BoxGeometry(10, 10, 10);
+var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
 var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
 var cube = new THREE.Mesh(geometry, material);
-cube.position.y = 5
+cube.position.y = 10
 cube.castShadow = true; //default is false
 cube.receiveShadow = false; //default
 scene.add(cube);
@@ -166,6 +166,7 @@ scene.add(cube);
 
 var texture = new THREE.TextureLoader().load('./styles/assets/piso.jpg');
 var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.png');
+var texture3 = new THREE.TextureLoader().load('./styles/assets/reloj2.png');
 
 // immediately use the texture for material creation
 var material2 = new THREE.MeshLambertMaterial({ map: texture });
@@ -176,6 +177,15 @@ var plane = new THREE.Mesh(geometry2, material2);
 plane.rotation.x = -90 * Math.PI / 180
 plane.receiveShadow = true;
 scene.add(plane);
+
+var materialReloj = new THREE.MeshLambertMaterial({ map: texture3 });
+
+var geometry4 = new THREE.PlaneGeometry(80, 80, 100, 100)
+//var material2 = new THREE.MeshLambertMaterial({ color: 0xebe4da, side: THREE.DoubleSide })
+var plane2 = new THREE.Mesh(geometry4, materialReloj);
+plane2.rotation.x = -90 * Math.PI / 180
+plane2.receiveShadow = true;
+scene.add(plane2);
 
 
 var geometry3 = new THREE.SphereGeometry(10, 32, 32);
