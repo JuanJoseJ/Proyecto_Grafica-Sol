@@ -39,6 +39,7 @@ function coordSol(fecha, lon, lat) {
     let x,y,z,factor; //sen y cos dan un valor entre -1 y 1, factor es para escalar esa distancia
     factor=500; //Hay que ponerle un numero grande
     x=Math.cos(A)*Math.cos(h); //Direccion Norte
+    console.log(A);
     y=Math.sin(A)*Math.cos(h); //Direccion oriente
     z=Math.sin(h); //Altura
 
