@@ -25,6 +25,11 @@ function logConsole() {
  
 }
 
+function CalcularCoordSol(){
+
+
+}
+
  
 //funcion que me dara el transcurso del tiempo 
 

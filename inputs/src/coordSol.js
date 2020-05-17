@@ -1,15 +1,38 @@
+//datos extraidos del html
+let inputDate = document.getElementById("Date");
+let inputTime = document.getElementById("Time");
+
+let inputLatitudGrados = document.getElementById("LatitudGrados");
+
+
+let inputLongitudGrados = document.getElementById("LongitudGrados");
+
 
 //browser-sync start --server --files "*.html, *.js"    
 var alfa,delta,eps,lam,L,g,n,date,T,gst,A,H,h,fi,lon,lat;
-console.log(coordSol());
-//console.log(getJulianDate('03-02-2000-07:00:00 GMT-0000')-getJulianDate('01-01-2000-12:00:00 GMT-0000'))// 2 de enero del 2000 al medio dia
+
+
+
+//generamos objeto con la fecha ingresada 
+let fecha = new Date(inputDate.value + " " + inputTime.value);
+
+function enviarInputs(){
+
+    coordSol(fecha, inputLongitudGrados.value ,inputLatitudGrados.value);
+}
+
 
 function coordSol(fecha, lon, lat){
-    date = new Date('03-01-2020-16:00:00 GMT-0500'); //Meter aquí la fecha
-    //date = new Date(fecha);
+
+    //date = new Date('03-01-2020-16:00:00 GMT-0500'); //Meter aquí la fecha
+    date = new Date(fecha);
+
     var pi= Math.PI;
-    lon=-75;
-    lat=6;
+
+    //son las de medallo
+    // lon=-75;
+    // lat=6;
+
     //Conseguir coordenadas ecuatoriales del sol
     n=getJulianDate(date)-2451545;
     var nH=n%1;
@@ -39,6 +62,8 @@ function coordSol(fecha, lon, lat){
     x=Math.cos(A); //Direccion Norte
     y=Math.sin(A); //Direccion oriente
     z=Math.sin(h); //Altura
+
+
     return [x*factor,y*factor,z*factor];
     //return [h*(180/pi),A*(180/pi)]; //coordenadas horizontales en grados
 }
@@ -52,3 +77,6 @@ function getJulianDate(today) {
     if(typeof today==="string") today = new Date(today);
     return ( ((typeof today==="number") ? today : today.getTime()) / 86400000.0 ) + 2440587.5;
 }
+
+console.log(coordSol());
+//console.log(getJulianDate('03-02-2000-07:00:00 GMT-0000')-getJulianDate('01-01-2000-12:00:00 GMT-0000'))// 2 de enero del 2000 al medio dia
