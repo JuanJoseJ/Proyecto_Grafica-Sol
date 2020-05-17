@@ -114,6 +114,7 @@ input[type=button]{
     font-weight: bold;
     cursor: pointer;
     
+    
 }
 
 input[type=button]:hover{
@@ -122,6 +123,11 @@ input[type=button]:hover{
  
 }
 
+.run{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
 
 .Time{

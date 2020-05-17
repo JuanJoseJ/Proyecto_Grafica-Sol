@@ -13,12 +13,16 @@ function enviarInputs(){
 
     let inputLongitudGrados = document.getElementById("LongitudGrados");
 
-    let fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
+    var fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
 
     console.log(fecha);
     console.log(coordSol(fecha, parseInt(inputLongitudGrados.value,10) ,parseInt(inputLatitudGrados.value,10)));
     
+    let cambio = document.getElementById("run");
+    console.log(cambio.value)
+    watchTime(inputDate.value, fecha, cambio.value);
 }
+
 
 
 function coordSol(fecha, lon, lat){
@@ -78,4 +82,48 @@ function getJulianDate(today) {
 }
 
 
-//console.log(getJulianDate('03-02-2000-07:00:00 GMT-0000')-getJulianDate('01-01-2000-12:00:00 GMT-0000'))// 2 de enero del 2000 al medio dia
+ 
+//funcion que me dara el transcurso del tiempo 
+function watchTime(ano_mes_dia, fecha, cambio){
+   
+    let nuevaFecha = fecha;
+    let hour = nuevaFecha.getHours();
+    let min = nuevaFecha.getMinutes();
+    let sec = nuevaFecha.getSeconds();
+
+    if(cambio){
+        min =  cambiarTiempo(min);
+    }
+    
+    hour = mostrarDosDigitos(hour);
+    min = mostrarDosDigitos(min);
+    sec = mostrarDosDigitos(sec);
+  
+    nuevaFecha = new Date(ano_mes_dia + " " + hour + ":" + min + ":" + sec +" GMT-0500");
+    document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
+    let t = setTimeout(function(){ watchTime(ano_mes_dia,nuevaFecha) }, 1000); /* setting timer */
+}
+  
+//agrega un 0 a la izquierda a los valores menores de 10
+function mostrarDosDigitos(k) {
+    if (k < 10) {
+        return "0" + k;
+    } else {
+        return k;
+    }
+}
+  
+//funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
+function cambiarTiempo(min){
+
+    let cambioMin = min;
+
+    if (cambioMin == 30) {
+        cambioMin = 0;
+    } else {
+        cambioMin += 30;
+    }
+
+    return cambioMin;
+
+}

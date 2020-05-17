@@ -77,7 +77,7 @@ scene.add(light);
 
 var luzX = 70
 var luzY = 25
-var luzZ = 500
+var luzZ = -500
 
 
     directionalLight.position.set(luzX, luzY, luzZ)
@@ -91,13 +91,9 @@ function animate() {
     renderer.render(scene, camera);
     controls.update();
     sphere.rotation.y += 0.01;
-    sphere.position.x += 0.1;
-    sphere.position.y += 0.1;
-    sphere.position.z += 0.1;
+     
 
     
-
-    directionalLight.position.set(luzX += 0.1, luzY, luzZ);
 }
 
 animate();
