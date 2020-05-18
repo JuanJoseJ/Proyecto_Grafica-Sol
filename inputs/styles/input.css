@@ -126,6 +126,29 @@ input[type=button]{
     
 }
 
+.lista{
+    margin-top: 1em;
+    background-color: #3772FF;
+    border: none;
+    border-radius: 2em;
+    width: 200px;
+    height: 25px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    float: left;
+    position: relative;
+    transition-duration: 0.5s;
+    
+}
+
+.lista:hover{
+    
+    background-color: #4848ff;
+ 
+}
+
 input[type=button]:hover{
     
     background-color: #4848ff;
