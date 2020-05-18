@@ -7,8 +7,7 @@ function coordSol(fecha, lon, lat) {
 
     //date = new Date('03-01-2020-16:00:00 GMT-0500'); //Meter aquí la fecha
     date = fecha;
-
-    var pi = Math.PI;
+    let pi = Math.PI;
 
     //son las de medallo
     // lon=-75;
@@ -16,7 +15,7 @@ function coordSol(fecha, lon, lat) {
 
     //Conseguir coordenadas ecuatoriales del sol
     n = getJulianDate(date) - 2451545;
-    var nH = n % 1;
+    let nH = n % 1;
     g = 357.528 + 0.9856003 * n;
     L = 280.460 + 0.9856474 * n
     eps = 23.439;
@@ -237,7 +236,6 @@ function correrSimulacion(){
 
     cambioDeHoraMostrando(cambio);
     
-
 }
 
 function cambioDeHoraMostrando(cambio) {
@@ -276,7 +274,7 @@ function cambioDeHoraMostrando(cambio) {
     fechaGlobal = new Date(ano + "-" + mes + "-" + dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
     document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio) }, 1000); /* setting timer */
+    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal,lat,lon) }, 1000); /* setting timer */
 }
 
 //funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
@@ -347,4 +345,12 @@ function cambiarTiempo(ano,mes,dia,hour,min) {
 
     return [cambioAno,cambioMes,cambioDia,cambioHour, cambioMin];
 
+}
+
+function animarSol(fecha){
+    let positionSun = coordSol(fecha, lon, lat);
+    console.log(positionSun);
+    directionalLight.intensity=1;
+    directionalLight.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio la posicion del objeto de la luz
+    sphere.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio posicion de la esfera
 }
