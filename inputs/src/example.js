@@ -343,8 +343,8 @@ function cambiarTiempo(ano,mes,dia,hour,min) {
 
 }
 
-function animarSol(fecha, latitud, longitud){
-    let positionSun = coordSol(fecha, latitud, longitud);
+function animarSol(fecha){
+    let positionSun = coordSol(fecha, lon, lat);
     console.log(positionSun);
     directionalLight.intensity=1;
     directionalLight.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio la posicion del objeto de la luz
