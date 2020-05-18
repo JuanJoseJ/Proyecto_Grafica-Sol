@@ -207,8 +207,8 @@ function enviarInputs() {
     fechaGlobal = fecha;
 
     console.log(inputDate.value);
-    let lon = parseInt(inputLongitudGrados.value, 10);
-    let lat = parseInt(inputLatitudGrados.value, 10);
+    lon = parseInt(inputLongitudGrados.value, 10);
+    lat = parseInt(inputLatitudGrados.value, 10);
     let positionSun = coordSol(fecha, lon, lat)
 
     console.log(positionSun);
