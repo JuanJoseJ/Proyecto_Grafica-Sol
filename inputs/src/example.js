@@ -187,6 +187,8 @@ animate();
 
 function enviarInputs() {
 
+console.log(scene.children[scene.children.length-1]);
+
     let inputDate = document.getElementById("Date");
     let inputTime = document.getElementById("Time");
 
@@ -214,7 +216,7 @@ function enviarInputs() {
     
     let objetoInput = document.getElementById("objetos");
     if (objetoInput.value == 0) {
-
+        
         mostrarCilindro();
 
     } else if (objetoInput.value == 1){
@@ -238,6 +240,9 @@ function enviarInputs() {
 }
 
 function mostrarCarro(){
+    if(scene.children[scene.children.length-1].type!="AmbientLight"){
+        scene.children[scene.children.length-1].visible=false;
+    }
     const carro = new OBJLoader2();
     carro.load('./styles/assets/subaru.obj', function (pin) {
         pin.traverse(function (child) { child.castShadow = true; })
@@ -247,6 +252,9 @@ function mostrarCarro(){
 }
 
 function mostrarHombre(){
+    if(scene.children[scene.children.length-1].type!="AmbientLight"){
+        scene.children[scene.children.length-1].visible=false;
+    }
     const hombre = new OBJLoader2();
     hombre.load('./styles/assets/hombre.obj', function (pin) {
         pin.traverse(function (child) { child.castShadow = true; })
@@ -256,6 +264,9 @@ function mostrarHombre(){
 }
 
 function mostrarSilla(){
+    if(scene.children[scene.children.length-1].type!="AmbientLight"){
+        scene.children[scene.children.length-1].visible=false;
+    }
     const silla = new OBJLoader2();
     silla.load('./styles/assets/silla.obj', function (pin) {
         pin.traverse(function (child) { child.castShadow = true; })
@@ -265,7 +276,10 @@ function mostrarSilla(){
 }
 
 function mostrarEdificio(){
-    const edificio = new OBJLoader2();
+    if(scene.children[scene.children.length-1].type!="AmbientLight"){
+        scene.children[scene.children.length-1].visible=false;
+    }
+    var edificio = new OBJLoader2();
     edificio.load('./styles/assets/edificio.obj', function (pin) {
         pin.traverse(function (child) { child.castShadow = true; })
         pin.scale.set( 2, 2, 2 )
@@ -423,3 +437,4 @@ function pararFuncion(){
 document.getElementById("set").addEventListener('click',enviarInputs);
 document.getElementById("run").addEventListener('click',correrSimulacion);
 document.getElementById("stop").addEventListener('click',pararFuncion);
+
