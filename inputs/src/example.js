@@ -1,5 +1,6 @@
 //browser-sync start --server --files "*.html, *.js"    
 var alfa, delta, eps, lam, L, g, n, date, T, gst, A, H, h, fi, lon, lat;
+var iterar;
 
 function coordSol(fecha, lon, lat) {
 
@@ -252,7 +253,7 @@ function cambioDeHoraMostrando(ano_mes_dia, fecha, cambio) {
 
     nuevaFecha = new Date(ano_mes_dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    let t = setTimeout(function () { cambioDeHoraMostrando(ano_mes_dia, nuevaFecha,cambio) }, 1000); /* setting timer */
+    iterar = setTimeout(function () { cambioDeHoraMostrando(ano_mes_dia, nuevaFecha,cambio) }, 1000); /* setting timer */
 }
 
 //funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
