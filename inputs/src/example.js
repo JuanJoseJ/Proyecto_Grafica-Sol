@@ -1,6 +1,7 @@
 //browser-sync start --server --files "*.html, *.js"    
 var alfa, delta, eps, lam, L, g, n, date, T, gst, A, H, h, fi, lon, lat;
 var iterar;
+var fechaGlobal;
 
 function coordSol(fecha, lon, lat) {
 
@@ -204,6 +205,7 @@ function enviarInputs() {
     let inputLongitudGrados = document.getElementById("LongitudGrados");
 
     var fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
+    fechaGlobal = fecha;
 
     console.log(inputDate.value);
     let lon = parseInt(inputLongitudGrados.value, 10);
@@ -232,22 +234,24 @@ function correrSimulacion(){
 
     let fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
 
-    cambioDeHoraMostrando(fecha, cambio);
+
+    cambioDeHoraMostrando(cambio);
     
 
 }
 
-function cambioDeHoraMostrando(nFecha, cambio) {
+function cambioDeHoraMostrando(cambio) {
 
-    let nuevaFecha = nFecha;
+    //agrego esta fecha a una global dado el caso de que le pongan stop y quieran seguir
+    
+    
+    let ano = fechaGlobal.getFullYear();
+    let mes = fechaGlobal.getMonth() + 1;
+    let dia = fechaGlobal.getDate();
 
-    let ano = nuevaFecha.getFullYear();
-    let mes = nuevaFecha.getMonth() + 1;
-    let dia = nuevaFecha.getDate();
-
-    let hour = nuevaFecha.getHours();
-    let min = nuevaFecha.getMinutes();
-    let sec = nuevaFecha.getSeconds();
+    let hour = fechaGlobal.getHours();
+    let min = fechaGlobal.getMinutes();
+    let sec = fechaGlobal.getSeconds();
 
    
     if (cambio == true) {
@@ -269,10 +273,10 @@ function cambioDeHoraMostrando(nFecha, cambio) {
     sec = mostrarDosDigitos(sec);
 
     // ano-mes-dia
-    nuevaFecha = new Date(ano + "-" + mes + "-" + dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
+    fechaGlobal = new Date(ano + "-" + mes + "-" + dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
     document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    iterar = setTimeout(function () { cambioDeHoraMostrando(nuevaFecha,cambio) }, 1000); /* setting timer */
+    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio) }, 1000); /* setting timer */
 }
 
 //funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
