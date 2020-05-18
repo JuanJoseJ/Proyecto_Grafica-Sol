@@ -187,54 +187,62 @@ animate();
 
 function enviarInputs() {
 
-console.log(scene.children[scene.children.length-1]);
 
-    let inputDate = document.getElementById("Date");
-    let inputTime = document.getElementById("Time");
+    //manejo de errores
+    if(document.getElementById("Date").value != "" &&  document.getElementById("Time").value != "" && document.getElementById("LatitudGrados").value != "" 
+    && document.getElementById("LongitudGrados").value != ""){
+        console.log(scene.children[scene.children.length-1]);
 
-    let inputLatitudGrados = document.getElementById("LatitudGrados");
-
-    let inputLongitudGrados = document.getElementById("LongitudGrados");
-
-    var fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
-    fechaGlobal = fecha;
-    console.log(fecha);
-    console.log(inputDate.value);
-    lon = parseInt(inputLongitudGrados.value, 10);
-    lat = parseInt(inputLatitudGrados.value, 10);
-    let positionSun = coordSol(fecha, lon, lat)
-
-    console.log(positionSun);
-    directionalLight.intensity = 1;
-    directionalLight.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio la posicion del objeto de la luz
-    sphere.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio posicion de la esfera
-
-    console.log(directionalLight.intensity);
-    let cambio = false; //la forma de cambiar este valor es undiendo el boton run 
-    watchTime(inputDate.value, fecha, cambio);
-
+        let inputDate = document.getElementById("Date");
+        let inputTime = document.getElementById("Time");
     
-    let objetoInput = document.getElementById("objetos");
-    if (objetoInput.value == 0) {
+        let inputLatitudGrados = document.getElementById("LatitudGrados");
+    
+        let inputLongitudGrados = document.getElementById("LongitudGrados");
+    
+        var fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
+        fechaGlobal = fecha;
+        console.log(fecha);
+        console.log(inputDate.value);
+        lon = parseInt(inputLongitudGrados.value, 10);
+        lat = parseInt(inputLatitudGrados.value, 10);
+        let positionSun = coordSol(fecha, lon, lat)
+    
+        console.log(positionSun);
+        directionalLight.intensity = 1;
+        directionalLight.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio la posicion del objeto de la luz
+        sphere.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio posicion de la esfera
+    
+        console.log(directionalLight.intensity);
+        let cambio = false; //la forma de cambiar este valor es undiendo el boton run 
+        watchTime(inputDate.value, fecha, cambio);
+    
         
-        mostrarCilindro();
-
-    } else if (objetoInput.value == 1){
-
-        mostrarHombre();
-
-    } else if (objetoInput.value == 2){
-
-        mostrarSilla();
-
-    } else if (objetoInput.value == 3){
-
-        mostrarEdificio();
-
-    }else {
-
-        mostrarCarro();
+        let objetoInput = document.getElementById("objetos");
+        if (objetoInput.value == 0) {
+            
+            mostrarCilindro();
+    
+        } else if (objetoInput.value == 1){
+    
+            mostrarHombre();
+    
+        } else if (objetoInput.value == 2){
+    
+            mostrarSilla();
+    
+        } else if (objetoInput.value == 3){
+    
+            mostrarEdificio();
+    
+        }else {
+    
+            mostrarCarro();
+        }
+    }else{
+        alert("Para realizar un set debe llenar todos los campos");
     }
+
     
     
 }
@@ -299,18 +307,23 @@ function mostrarCilindro() {
 
 function correrSimulacion() {
 
-    let cambio = true;
-    let inputDate = document.getElementById("Date");
-    let inputTime = document.getElementById("Time");
+    if(document.getElementById("Date").value != "" &&  document.getElementById("Time").value != "" && document.getElementById("LatitudGrados").value != "" 
+    && document.getElementById("LongitudGrados").value != ""){
+        let cambio = true;
+        let inputDate = document.getElementById("Date");
+        let inputTime = document.getElementById("Time");
 
-    let inputLatitudGrados = document.getElementById("LatitudGrados");
+        let inputLatitudGrados = document.getElementById("LatitudGrados");
 
-    let inputLongitudGrados = document.getElementById("LongitudGrados");
+        let inputLongitudGrados = document.getElementById("LongitudGrados");
 
-    let fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
+        let fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
 
 
-    cambioDeHoraMostrando(cambio);
+        cambioDeHoraMostrando(cambio);
+    }else{
+        alert("Para correr debe primero llenar todos los campos y realizar el set");
+    }
 
 }
 
