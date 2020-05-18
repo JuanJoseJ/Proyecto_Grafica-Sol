@@ -39,8 +39,8 @@ function coordSol(fecha, lon, lat) {
     //coordenadas rectangulares
     let x,y,z,factor; //sen y cos dan un valor entre -1 y 1, factor es para escalar esa distancia
     factor=500; //Hay que ponerle un numero grande
-    x=Math.cos(A)*Math.cos(h); //Direccion Norte
-    y=Math.sin(A)*Math.cos(h); //Direccion oriente
+    x=Math.cos(A); //Direccion Norte
+    y=Math.sin(A); //Direccion oriente
     z=Math.sin(h); //Altura
 
     
@@ -124,7 +124,7 @@ function onWindowResize() {
 var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
 var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
 var cube = new THREE.Mesh(geometry, material);
-cube.position.y = 1
+cube.position.y = 5
 cube.castShadow = true; //default is false
 cube.receiveShadow = false; //default
 scene.add(cube);
@@ -274,7 +274,7 @@ function cambioDeHoraMostrando(cambio) {
     fechaGlobal = new Date(ano + "-" + mes + "-" + dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
     document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal,lat,lon) }, 1000); /* setting timer */
+    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal,lat,lon) }, 500); /* setting timer */
 }
 
 //funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
