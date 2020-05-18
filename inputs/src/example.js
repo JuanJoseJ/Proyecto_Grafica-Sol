@@ -238,7 +238,7 @@ function enviarInputs() {
 
     let inputLongitudGrados = document.getElementById("LongitudGrados");
 
-    var fecha = new Date(inputDate.value + " " + inputTime.value + " GMT-0000");
+    var fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
     fechaGlobal = fecha;
     console.log(fecha);
     console.log(inputDate.value);
@@ -396,5 +396,10 @@ function animarSol(fecha) {
     sphere.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio posicion de la esfera
 }
 
+function pararFuncion(){
+    clearTimeout(iterar);
+}
 //intento corregir lo de los modulos
 document.getElementById("set").addEventListener('click',enviarInputs);
+document.getElementById("run").addEventListener('click',correrSimulacion);
+document.getElementById("stop").addEventListener('click',pararFuncion);
