@@ -1,6 +1,8 @@
-//import * as THREE from './inputs/three.js-dev/build/three.module.js'
-//import { OBJLoader2 } from './three.js-dev/examples/jsm/loaders/OBJLoader2.js'
-//import { OrbitControls } from './three.js-dev/examples/jsm/controls/OrbitControls.js';
+
+import * as THREE from '../three.js-dev/build/three.module.js';
+import { OBJLoader2 } from '../three.js-dev/examples/jsm/loaders/OBJLoader2.js';
+import { OrbitControls } from '../three.js-dev/examples/jsm/controls/OrbitControls.js';
+
 
 //browser-sync start --server --files "*.html, *.js"    
 var alfa, delta, eps, lam, L, g, n, date, T, gst, A, H, h, fi, lon, lat;
@@ -41,14 +43,14 @@ function coordSol(fecha, lon, lat) {
         }
     }
     //coordenadas rectangulares
-    let x,y,z,factor; //sen y cos dan un valor entre -1 y 1, factor es para escalar esa distancia
-    factor=500; //Hay que ponerle un numero grande
-    x=Math.cos(A); //Direccion Norte
-    y=Math.sin(A); //Direccion oriente
-    z=Math.sin(h); //Altura
+    let x, y, z, factor; //sen y cos dan un valor entre -1 y 1, factor es para escalar esa distancia
+    factor = 500; //Hay que ponerle un numero grande
+    x = Math.cos(A); //Direccion Norte
+    y = Math.sin(A); //Direccion oriente
+    z = Math.sin(h); //Altura
 
-    
-    return [x*factor,-y*factor,z*factor];
+
+    return [x * factor, -y * factor, z * factor];
     //return [h*(180/pi),A*(180/pi)]; //coordenadas horizontales en grados
 }
 
@@ -105,7 +107,7 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 document.body.appendChild(renderer.domElement);
 //camera.position.z = 100;
 
-controls = new THREE.OrbitControls(camera, renderer.domElement);
+var controls = new OrbitControls(camera, renderer.domElement);
 // camera.position.set(0, 20, 100);
 camera.position.set(-2.2507412289962487, 234.7144596484875, 258.62585054188287);
 controls.update();
@@ -125,19 +127,43 @@ function onWindowResize() {
 
 }
 
-// const objLoader = new OBJLoader2();
-// objLoader.load('/styles/assets/hombre.obj', function (pin) {
+
+
+// const carro = new OBJLoader2();
+// carro.load('./styles/assets/subaru.obj', function (pin) {
 //     pin.traverse(function (child) { child.castShadow = true; })
+//     pin.scale.set( 12, 12, 12 )
 //     scene.add(pin);
 // });
 
-var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
-var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
-var cube = new THREE.Mesh(geometry, material);
-cube.position.y = 5
-cube.castShadow = true; //default is false
-cube.receiveShadow = false; //default
-scene.add(cube);
+// const hombre = new OBJLoader2();
+// hombre.load('./styles/assets/hombre.obj', function (pin) {
+//     pin.traverse(function (child) { child.castShadow = true; })
+//     pin.scale.set( 25, 25, 25 )
+//     scene.add(pin);
+// });
+
+// const silla = new OBJLoader2();
+// silla.load('./styles/assets/silla.obj', function (pin) {
+//     pin.traverse(function (child) { child.castShadow = true; })
+//     pin.scale.set( 1, 1, 1 )
+//     scene.add(pin);
+// });
+
+const edificio = new OBJLoader2();
+edificio.load('./styles/assets/edificio.obj', function (pin) {
+    pin.traverse(function (child) { child.castShadow = true; })
+    pin.scale.set( 2, 2, 2 )
+    scene.add(pin);
+});
+
+// var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
+// var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
+// var cube = new THREE.Mesh(geometry, material);
+// cube.position.y = 5
+// cube.castShadow = true; //default is false
+// cube.receiveShadow = false; //default
+// scene.add(cube);
 
 var texture = new THREE.TextureLoader().load('./styles/assets/piso.jpg');
 var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.png');
@@ -284,7 +310,7 @@ function cambioDeHoraMostrando(cambio) {
     fechaGlobal = new Date(ano + "-" + mes + "-" + dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
     document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal,lat,lon) }, 500); /* setting timer */
+    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal, lat, lon) }, 500); /* setting timer */
 }
 
 //funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 

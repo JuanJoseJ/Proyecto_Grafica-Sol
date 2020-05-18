@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shadow</title>
     <style>
-        body { margin: 0; }
-        canvas { display: block; }
-      </style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
     <link rel="stylesheet" href="./styles/input.css">
 </head>
 
 <body>
 
     <script src="./three.js-dev/build/three.js"></script>
-    <script src="./three.js-dev/examples/js/controls/OrbitControls.js"></script>
-    <script  src="./src/example.js"></script>
+    <!--script src="./three.js-dev/examples/js/controls/OrbitControls.js"></script>
+    <script src="./three.js-dev/examples/jsm/loaders/OBJLoader2.js"></script-->
+    <script type="module" src="./src/example.js"></script>
+
 
     <div class="contenedorThreeJs">
-    
+
         <div class="logo-container">
-            <img class = "logo" src="./styles/assets/logo.svg"/>
+            <img class="logo" src="./styles/assets/logo.svg" />
         </div>
         <div id="ano_mes_dia" class="ano_mes_dia"></div>
         <div id="clock" class="clock"></div>
@@ -49,14 +57,14 @@
                 <div class="input-container-longitud">
                     <form action="">
                         <label for="Longitud">Longitud: </label>
-                        <input type="number" id="LongitudGrados" name="Longitud", class="longitud">
+                        <input type="number" id="LongitudGrados" name="Longitud" , class="longitud">
                         <text>°</text>
                     </form>
                 </div>
                 <input class="setAll" type="button" onclick="enviarInputs()" value="Set">
                 <input class="run" type="button" onclick="correrSimulacion()" value="Run">
                 <input class="stop" type="button" onclick="clearTimeout(iterar)" value="Stop">
-            </br>
+                </br>
                 <select id="objetos" class="lista">
                     <option value="mier">Seleccione un Objeto</option>
                     <option value="mier">1</option>
@@ -71,4 +79,5 @@
     <!--script src="./src/example.js"></script-->
 
 </body>
-</html>  
+
+</html>
