@@ -203,8 +203,6 @@ function enviarInputs() {
     let lat = parseInt(inputLatitudGrados.value, 10);
     let positionSun = coordSol(fecha, lon, lat)
 
-    plane2.rotation.y = 0;
-    cube.rotation.z = 0;
     console.log(positionSun);
     directionalLight.intensity=1;
     directionalLight.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio la posicion del objeto de la luz
