@@ -10,7 +10,7 @@ var iterar;
 var fechaGlobal;
 
 function coordSol(fecha, lon, lat) {
-
+    
     //date = new Date('03-01-2020-16:00:00 GMT-0500'); //Meter aquí la fecha
     date = fecha;
     let pi = Math.PI;
@@ -78,7 +78,7 @@ function watchTime(ano_mes_dia, fecha, cambio) {
     min = mostrarDosDigitos(min);
     sec = mostrarDosDigitos(sec);
 
-    nuevaFecha = new Date(ano_mes_dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
+    nuevaFecha = new Date(ano_mes_dia + " " + hour + ":" + min + ":" + sec);
     document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
 }
@@ -177,7 +177,6 @@ function mostrarCilindro() {
 
 var texture = new THREE.TextureLoader().load('./styles/assets/piso.jpg');
 var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.png');
-var texture3 = new THREE.TextureLoader().load('./styles/assets/reloj2.jpg');
 
 // immediately use the texture for material creation
 var material2 = new THREE.MeshLambertMaterial({ map: texture });
@@ -190,19 +189,9 @@ plane.rotation.x = -90 * Math.PI / 180;
 plane.receiveShadow = true;
 scene.add(plane);
 
-var materialReloj = new THREE.MeshLambertMaterial({ map: texture3 });
 
 var geometry4 = new THREE.PlaneGeometry(200, 200, 100, 100)
 //var material2 = new THREE.MeshLambertMaterial({ color: 0xebe4da, side: THREE.DoubleSide })
-
-var plane2 = new THREE.Mesh(geometry4, materialReloj);
-plane2.rotation.x = -90 * Math.PI / 180
-plane2.rotation.z = 90 * Math.PI / 180
-plane2.position.y = 0.5;
-plane2.position.x = -45;
-plane2.receiveShadow = true;
-plane2.material.side = THREE.DoubleSide;
-scene.add(plane2);
 
 var geometry3 = new THREE.SphereGeometry(10, 32, 32);
 var material3 = new THREE.MeshBasicMaterial({ color: 0xffff00, map: texture2 });
@@ -249,9 +238,12 @@ function enviarInputs() {
 
     let inputLongitudGrados = document.getElementById("LongitudGrados");
 
-    var fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
-    fechaGlobal = fecha;
+    let inputGMT = document.getElementById("GMT");
+    console.log(inputGMT.value);
 
+    var fecha = new Date(inputDate.value + " " + inputTime.value + " GMT-0000");
+    fechaGlobal = fecha;
+    console.log(fecha);
     console.log(inputDate.value);
     lon = parseInt(inputLongitudGrados.value, 10);
     lat = parseInt(inputLatitudGrados.value, 10);
@@ -327,7 +319,7 @@ function cambioDeHoraMostrando(cambio) {
     fechaGlobal = new Date(ano + "-" + mes + "-" + dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
     document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal, lat, lon) }, 500); /* setting timer */
+    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal) }, 500); /* setting timer */
 }
 
 //funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
@@ -394,7 +386,6 @@ function cambiarTiempo(ano, mes, dia, hour, min) {
     }
 
     //final del dia
-
 
     return [cambioAno, cambioMes, cambioDia, cambioHour, cambioMin];
 
