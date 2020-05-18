@@ -167,7 +167,6 @@ edificio.load('./styles/assets/edificio.obj', function (pin) {
 
 var texture = new THREE.TextureLoader().load('./styles/assets/piso.jpg');
 var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.png');
-var texture3 = new THREE.TextureLoader().load('./styles/assets/reloj2.jpg');
 
 // immediately use the texture for material creation
 var material2 = new THREE.MeshLambertMaterial({ map: texture });
@@ -180,19 +179,9 @@ plane.rotation.x = -90 * Math.PI / 180;
 plane.receiveShadow = true;
 scene.add(plane);
 
-var materialReloj = new THREE.MeshLambertMaterial({ map: texture3 });
 
 var geometry4 = new THREE.PlaneGeometry(200, 200, 100, 100)
 //var material2 = new THREE.MeshLambertMaterial({ color: 0xebe4da, side: THREE.DoubleSide })
-
-var plane2 = new THREE.Mesh(geometry4, materialReloj);
-plane2.rotation.x = -90 * Math.PI / 180
-plane2.rotation.z = 90 * Math.PI / 180
-plane2.position.y = 0.5;
-plane2.position.x = -45;
-plane2.receiveShadow = true;
-plane2.material.side = THREE.DoubleSide;
-scene.add(plane2);
 
 var geometry3 = new THREE.SphereGeometry(10, 32, 32);
 var material3 = new THREE.MeshBasicMaterial({ color: 0xffff00, map: texture2 });
