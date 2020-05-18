@@ -23,6 +23,7 @@
     <!--script src="./three.js-dev/examples/js/controls/OrbitControls.js"></script>
     <script src="./three.js-dev/examples/jsm/loaders/OBJLoader2.js"></script-->
     <script type="module" src="./src/example.js"></script>
+    
 
 
     <div class="contenedorThreeJs">
@@ -61,16 +62,17 @@
                         <text>°</text>
                     </form>
                 </div>
-                <input class="setAll" type="button" onclick="enviarInputs()" value="Set">
+            <input class="setAll" type="button" id="set" onclick="" value="Set">
                 <input class="run" type="button" onclick="correrSimulacion()" value="Run">
                 <input class="stop" type="button" onclick="clearTimeout(iterar)" value="Stop">
+
                 </br>
                 <select id="objetos" class="lista">
-                    <option value="mier">Seleccione un Objeto</option>
-                    <option value="mier">1</option>
-                    <option value="saab">2</option>
-                    <option value="opel">3</option>
-                    <option value="audi">4</option>
+                    <option value="0">Seleccione un Objeto</option>
+                    <option value="1">Hombre</option>
+                    <option value="2">Silla</option>
+                    <option value="3">Edificio</option>
+                    <option value="4">Carro</option>
                 </select>
 
             </div>
