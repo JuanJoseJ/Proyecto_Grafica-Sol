@@ -48,8 +48,7 @@ function coordSol(fecha, lon, lat) {
     x = Math.cos(A); //Direccion Norte
     y = Math.sin(A); //Direccion oriente
     z = Math.sin(h); //Altura
-
-
+    
     return [x * factor, -y * factor, z * factor];
     //return [h*(180/pi),A*(180/pi)]; //coordenadas horizontales en grados
 }
@@ -207,7 +206,7 @@ function enviarInputs() {
         lon = parseInt(inputLongitudGrados.value, 10);
         lat = parseInt(inputLatitudGrados.value, 10);
         let positionSun = coordSol(fecha, lon, lat)
-    
+
         console.log(positionSun);
         directionalLight.intensity = 1;
         directionalLight.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio la posicion del objeto de la luz
@@ -363,7 +362,7 @@ function cambioDeHoraMostrando(cambio) {
     fechaGlobal = new Date(ano + "-" + mes + "-" + dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
     document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal) }, 500); /* setting timer */
+    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal); actualizarAyh() }, 500); /* setting timer */
 }
 
 //funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
@@ -445,6 +444,11 @@ function animarSol(fecha) {
 
 function pararFuncion(){
     clearTimeout(iterar);
+}
+
+function actualizarAyh(){
+    document.getElementById("Azimut").innerHTML = A;
+    document.getElementById("Altura").innerHTML = h;
 }
 //intento corregir lo de los modulos
 document.getElementById("set").addEventListener('click',enviarInputs);
