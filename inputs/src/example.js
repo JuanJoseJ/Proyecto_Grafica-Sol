@@ -58,6 +58,11 @@ function getJulianDate(today) {
 function watchTime(ano_mes_dia, fecha, cambio) {
 
     let nuevaFecha = fecha;
+
+    let ano = nuevaFecha.getFullYear();
+    let mes = nuevaFecha.getMonth() + 1;
+    let dia = nuevaFecha.getDate();
+
     let hour = nuevaFecha.getHours();
     let min = nuevaFecha.getMinutes();
     let sec = nuevaFecha.getSeconds();
@@ -68,6 +73,7 @@ function watchTime(ano_mes_dia, fecha, cambio) {
     sec = mostrarDosDigitos(sec);
 
     nuevaFecha = new Date(ano_mes_dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
+    document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
 }
 
@@ -199,7 +205,7 @@ function enviarInputs() {
 
     var fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
 
-    console.log(fecha);
+    console.log(inputDate.value);
     let lon = parseInt(inputLongitudGrados.value, 10);
     let lat = parseInt(inputLatitudGrados.value, 10);
     let positionSun = coordSol(fecha, lon, lat)
@@ -226,47 +232,78 @@ function correrSimulacion(){
 
     let fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
 
-    cambioDeHoraMostrando(inputDate.value, fecha, cambio);
+    cambioDeHoraMostrando(fecha, cambio);
     
 
 }
 
-function cambioDeHoraMostrando(ano_mes_dia, fecha, cambio) {
+function cambioDeHoraMostrando(nFecha, cambio) {
 
-    let nuevaFecha = fecha;
+    let nuevaFecha = nFecha;
+
+    let ano = nuevaFecha.getFullYear();
+    let mes = nuevaFecha.getMonth() + 1;
+    let dia = nuevaFecha.getDate();
+
     let hour = nuevaFecha.getHours();
     let min = nuevaFecha.getMinutes();
     let sec = nuevaFecha.getSeconds();
 
-    console.log(cambio);
+   
     if (cambio == true) {
-        let arregloTiempo = cambiarTiempo(hour,min);
-        hour = arregloTiempo[0];
-        min = arregloTiempo[1];
-        console.log(hour);
-        console.log(min);
+        let arregloTiempo = cambiarTiempo(ano,mes,dia,hour,min);
+        ano = arregloTiempo[0];
+        mes = arregloTiempo[1];
+        dia = arregloTiempo[2];
+
+        hour = arregloTiempo[3];
+        min = arregloTiempo[4];
     }
+
+    console.log(ano);
+    console.log(mes);
+    console.log(dia);
 
     hour = mostrarDosDigitos(hour);
     min = mostrarDosDigitos(min);
     sec = mostrarDosDigitos(sec);
 
-    nuevaFecha = new Date(ano_mes_dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
+    // ano-mes-dia
+    nuevaFecha = new Date(ano + "-" + mes + "-" + dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
+    document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    iterar = setTimeout(function () { cambioDeHoraMostrando(ano_mes_dia, nuevaFecha,cambio) }, 1000); /* setting timer */
+    iterar = setTimeout(function () { cambioDeHoraMostrando(nuevaFecha,cambio) }, 1000); /* setting timer */
 }
 
 //funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
-function cambiarTiempo(hour,min) {
+function cambiarTiempo(ano,mes,dia,hour,min) {
 
     let cambioMin = min;
     let cambioHour = hour;
+    let cambioDia = dia;
+    let cambioAno = ano;
+    let cambioMes = mes;
+
    
 
     if (cambioMin == 30) {
         cambioMin = 0;
         if(cambioHour === 23){
             cambioHour = 0;
+            if(cambioDia === 30 || cambioDia === 31){
+
+                cambioDia = 1;
+
+                if (cambioMes === 12) {
+                    cambioMes = 1;
+                    cambioAno ++;
+                }else{
+                    cambioMes ++;
+                }
+            }else{
+                cambioDia ++;
+            }
+            
         }else{
             cambioHour ++;
         }
@@ -278,14 +315,32 @@ function cambiarTiempo(hour,min) {
     }else if(cambioMin > 30){
 
         let aux = Math.abs(cambioMin-30);
-        console.log(aux)
-        cambioMin = aux;
-        cambioHour ++;
+        if(cambioHour === 23){
+            cambioHour = 0;
+            if(cambioDia === 30 || cambioDia === 31){
+
+                cambioDia = 1;
+
+                if (cambioMes === 12) {
+                    cambioMes = 1;
+                    cambioAno ++;
+                }else{
+                    cambioMes ++;
+                }
+            }else{
+                cambioDia ++;
+            }
+            
+        }else{
+            cambioMin = aux;
+            cambioHour ++;
+        }
+        
     }
 
     //final del dia
   
 
-    return [cambioHour, cambioMin];
+    return [cambioAno,cambioMes,cambioDia,cambioHour, cambioMin];
 
 }
