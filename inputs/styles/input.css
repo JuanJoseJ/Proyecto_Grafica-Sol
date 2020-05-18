@@ -22,6 +22,15 @@ body{
     
 }
 
+.ano_mes_dia{
+    
+    position: absolute center;
+    font-size: 1.2em;
+    text-align: center;
+
+
+}
+
 .clock{
 
     position: absolute center;
