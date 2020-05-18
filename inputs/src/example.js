@@ -1,3 +1,7 @@
+//import * as THREE from './inputs/three.js-dev/build/three.module.js'
+//import { OBJLoader2 } from './three.js-dev/examples/jsm/loaders/OBJLoader2.js'
+//import { OrbitControls } from './three.js-dev/examples/jsm/controls/OrbitControls.js';
+
 //browser-sync start --server --files "*.html, *.js"    
 var alfa, delta, eps, lam, L, g, n, date, T, gst, A, H, h, fi, lon, lat;
 var iterar;
@@ -37,14 +41,14 @@ function coordSol(fecha, lon, lat) {
         }
     }
     //coordenadas rectangulares
-    let x,y,z,factor; //sen y cos dan un valor entre -1 y 1, factor es para escalar esa distancia
-    factor=500; //Hay que ponerle un numero grande
-    x=Math.cos(A)*Math.cos(h); //Direccion Norte
-    y=Math.sin(A)*Math.cos(h); //Direccion oriente
-    z=Math.sin(h); //Altura
+    let x, y, z, factor; //sen y cos dan un valor entre -1 y 1, factor es para escalar esa distancia
+    factor = 500; //Hay que ponerle un numero grande
+    x = Math.cos(A) * Math.cos(h); //Direccion Norte
+    y = Math.sin(A) * Math.cos(h); //Direccion oriente
+    z = Math.sin(h); //Altura
 
-    
-    return [x*factor,-y*factor,z*factor];
+
+    return [x * factor, -y * factor, z * factor];
     //return [h*(180/pi),A*(180/pi)]; //coordenadas horizontales en grados
 }
 
@@ -121,6 +125,12 @@ function onWindowResize() {
 
 }
 
+// const objLoader = new OBJLoader2();
+// objLoader.load('/styles/assets/hombre.obj', function (pin) {
+//     pin.traverse(function (child) { child.castShadow = true; })
+//     scene.add(pin);
+// });
+
 var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
 var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
 var cube = new THREE.Mesh(geometry, material);
@@ -155,7 +165,7 @@ plane2.rotation.z = 90 * Math.PI / 180
 plane2.position.y = 0.5;
 plane2.position.x = -45;
 plane2.receiveShadow = true;
-plane2.material.side=THREE.DoubleSide;
+plane2.material.side = THREE.DoubleSide;
 scene.add(plane2);
 
 var geometry3 = new THREE.SphereGeometry(10, 32, 32);
@@ -172,7 +182,7 @@ directionalLight.shadow.camera.near = 5;    // default
 directionalLight.shadow.camera.far = 2000;
 var light = new THREE.AmbientLight(0x404040); // soft white light
 scene.add(light);
-directionalLight.intensity=4;
+directionalLight.intensity = 4;
 
 var luzX = 70
 var luzY = 25
@@ -212,16 +222,16 @@ function enviarInputs() {
     let positionSun = coordSol(fecha, lon, lat)
 
     console.log(positionSun);
-    directionalLight.intensity=1;
-    directionalLight.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio la posicion del objeto de la luz
-    sphere.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio posicion de la esfera
-    
+    directionalLight.intensity = 1;
+    directionalLight.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio la posicion del objeto de la luz
+    sphere.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio posicion de la esfera
+
     console.log(directionalLight.intensity);
     let cambio = false; //la forma de cambiar este valor es undiendo el boton run 
     watchTime(inputDate.value, fecha, cambio);
 }
 
-function correrSimulacion(){
+function correrSimulacion() {
 
     let cambio = true;
     let inputDate = document.getElementById("Date");
@@ -235,14 +245,14 @@ function correrSimulacion(){
 
 
     cambioDeHoraMostrando(cambio);
-    
+
 }
 
 function cambioDeHoraMostrando(cambio) {
 
     //agrego esta fecha a una global dado el caso de que le pongan stop y quieran seguir
-    
-    
+
+
     let ano = fechaGlobal.getFullYear();
     let mes = fechaGlobal.getMonth() + 1;
     let dia = fechaGlobal.getDate();
@@ -251,9 +261,9 @@ function cambioDeHoraMostrando(cambio) {
     let min = fechaGlobal.getMinutes();
     let sec = fechaGlobal.getSeconds();
 
-   
+
     if (cambio == true) {
-        let arregloTiempo = cambiarTiempo(ano,mes,dia,hour,min);
+        let arregloTiempo = cambiarTiempo(ano, mes, dia, hour, min);
         ano = arregloTiempo[0];
         mes = arregloTiempo[1];
         dia = arregloTiempo[2];
@@ -274,11 +284,11 @@ function cambioDeHoraMostrando(cambio) {
     fechaGlobal = new Date(ano + "-" + mes + "-" + dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
     document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal,lat,lon) }, 1000); /* setting timer */
+    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal, lat, lon) }, 1000); /* setting timer */
 }
 
 //funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
-function cambiarTiempo(ano,mes,dia,hour,min) {
+function cambiarTiempo(ano, mes, dia, hour, min) {
 
     let cambioMin = min;
     let cambioHour = hour;
@@ -286,71 +296,71 @@ function cambiarTiempo(ano,mes,dia,hour,min) {
     let cambioAno = ano;
     let cambioMes = mes;
 
-   
+
 
     if (cambioMin == 30) {
         cambioMin = 0;
-        if(cambioHour === 23){
+        if (cambioHour === 23) {
             cambioHour = 0;
-            if(cambioDia === 30 || cambioDia === 31){
+            if (cambioDia === 30 || cambioDia === 31) {
 
                 cambioDia = 1;
 
                 if (cambioMes === 12) {
                     cambioMes = 1;
-                    cambioAno ++;
-                }else{
-                    cambioMes ++;
+                    cambioAno++;
+                } else {
+                    cambioMes++;
                 }
-            }else{
-                cambioDia ++;
+            } else {
+                cambioDia++;
             }
-            
-        }else{
-            cambioHour ++;
+
+        } else {
+            cambioHour++;
         }
-        
-    }else if(cambioMin < 30 ){
+
+    } else if (cambioMin < 30) {
         cambioMin += 30;
 
 
-    }else if(cambioMin > 30){
+    } else if (cambioMin > 30) {
 
-        let aux = Math.abs(cambioMin-30);
-        if(cambioHour === 23){
+        let aux = Math.abs(cambioMin - 30);
+        if (cambioHour === 23) {
             cambioHour = 0;
-            if(cambioDia === 30 || cambioDia === 31){
+            if (cambioDia === 30 || cambioDia === 31) {
 
                 cambioDia = 1;
 
                 if (cambioMes === 12) {
                     cambioMes = 1;
-                    cambioAno ++;
-                }else{
-                    cambioMes ++;
+                    cambioAno++;
+                } else {
+                    cambioMes++;
                 }
-            }else{
-                cambioDia ++;
+            } else {
+                cambioDia++;
             }
-            
-        }else{
+
+        } else {
             cambioMin = aux;
-            cambioHour ++;
+            cambioHour++;
         }
-        
+
     }
 
     //final del dia
-  
 
-    return [cambioAno,cambioMes,cambioDia,cambioHour, cambioMin];
+
+    return [cambioAno, cambioMes, cambioDia, cambioHour, cambioMin];
 
 }
 
-function animarSol(fecha){
+function animarSol(fecha) {
     let positionSun = coordSol(fecha, lon, lat);
     console.log(positionSun);
-    directionalLight.intensity=1;
-    directionalLight.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio la posicion del objeto de la luz
-    sphere.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio posicion de la esfera
+    directionalLight.intensity = 1;
+    directionalLight.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio la posicion del objeto de la luz
+    sphere.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio posicion de la esfera
 }
