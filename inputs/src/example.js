@@ -136,11 +136,10 @@ function onWindowResize() {
 var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
 var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
 var cube = new THREE.Mesh(geometry, material);
-cube.position.y = 10
+cube.position.y = 1
 cube.castShadow = true; //default is false
 cube.receiveShadow = false; //default
 scene.add(cube);
-
 
 var texture = new THREE.TextureLoader().load('./styles/assets/piso.jpg');
 var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.png');
@@ -168,6 +167,7 @@ plane2.rotation.z = 90 * Math.PI / 180
 plane2.position.y = 0.5;
 plane2.position.x = -45;
 plane2.receiveShadow = true;
+plane2.material.side=THREE.DoubleSide;
 scene.add(plane2);
 
 var geometry3 = new THREE.SphereGeometry(10, 32, 32);
@@ -223,12 +223,14 @@ function enviarInputs() {
     let lat = parseInt(inputLatitudGrados.value, 10);
     let positionSun = coordSol(fecha, lon, lat)
 
+    plane2.rotation.y = 0;
+    cube.rotation.z = 0;
     console.log(positionSun);
     directionalLight.intensity=1;
     directionalLight.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio la posicion del objeto de la luz
     sphere.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio posicion de la esfera
-    
-    console.log(directionalLight.intensity);
+    plane2.rotation.y = 90 * Math.PI / 180-lat;
+    cube.rotation.z = 90 * Math.PI / 180-lat;
 
     let cambio = document.getElementById("run");
     console.log(cambio.value)
