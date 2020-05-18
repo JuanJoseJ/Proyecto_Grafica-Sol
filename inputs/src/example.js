@@ -8,7 +8,7 @@ var iterar;
 var fechaGlobal;
 
 function coordSol(fecha, lon, lat) {
-
+    
     //date = new Date('03-01-2020-16:00:00 GMT-0500'); //Meter aquí la fecha
     date = fecha;
     let pi = Math.PI;
@@ -47,7 +47,7 @@ function coordSol(fecha, lon, lat) {
     y=Math.sin(A); //Direccion oriente
     z=Math.sin(h); //Altura
 
-    
+    console.log("A: "+A);
     return [x*factor,-y*factor,z*factor];
     //return [h*(180/pi),A*(180/pi)]; //coordenadas horizontales en grados
 }
@@ -76,7 +76,7 @@ function watchTime(ano_mes_dia, fecha, cambio) {
     min = mostrarDosDigitos(min);
     sec = mostrarDosDigitos(sec);
 
-    nuevaFecha = new Date(ano_mes_dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
+    nuevaFecha = new Date(ano_mes_dia + " " + hour + ":" + min + ":" + sec);
     document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
 }
@@ -213,9 +213,12 @@ function enviarInputs() {
 
     let inputLongitudGrados = document.getElementById("LongitudGrados");
 
-    var fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
-    fechaGlobal = fecha;
+    let inputGMT = document.getElementById("GMT");
+    console.log(inputGMT.value);
 
+    var fecha = new Date(inputDate.value + " " + inputTime.value + " GMT-0000");
+    fechaGlobal = fecha;
+    console.log(fecha);
     console.log(inputDate.value);
     lon = parseInt(inputLongitudGrados.value, 10);
     lat = parseInt(inputLatitudGrados.value, 10);
@@ -284,7 +287,7 @@ function cambioDeHoraMostrando(cambio) {
     fechaGlobal = new Date(ano + "-" + mes + "-" + dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
     document.getElementById("ano_mes_dia").innerHTML = ano + "-" + mes + "-" + dia;
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal,lat,lon) }, 500); /* setting timer */
+    iterar = setTimeout(function () { cambioDeHoraMostrando(cambio); animarSol(fechaGlobal) }, 500); /* setting timer */
 }
 
 //funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
@@ -351,7 +354,6 @@ function cambiarTiempo(ano, mes, dia, hour, min) {
     }
 
     //final del dia
-
 
     return [cambioAno, cambioMes, cambioDia, cambioHour, cambioMin];
 

@@ -50,11 +50,16 @@ body{
     flex-direction: column;
     padding-left: 1em;
    
-        
-
 }
 
 .input-container-fecha-hora{
+    
+    padding-top: 1em;
+    flex-direction: column;
+        
+}
+
+.container-gmt{
     
     padding-top: 1em;
     flex-direction: column;
@@ -104,6 +109,15 @@ input[type=number].longitud{
 }
 
 input[type=number].latitud{
+    border: 1px solid #3772FF;
+    background-color: aliceblue;
+    cursor: text;
+    width: 9em;
+   
+}
+
+input[type=text]{
+    
     border: 1px solid #3772FF;
     background-color: aliceblue;
     cursor: text;
