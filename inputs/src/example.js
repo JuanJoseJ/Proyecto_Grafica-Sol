@@ -128,51 +128,7 @@ function onWindowResize() {
 }
 
 
-function mostrarCarro(){
-    const carro = new OBJLoader2();
-    carro.load('./styles/assets/subaru.obj', function (pin) {
-        pin.traverse(function (child) { child.castShadow = true; })
-        pin.scale.set( 12, 12, 12 )
-        scene.add(pin);
-    });
-}
 
-function mostrarHombre(){
-    const hombre = new OBJLoader2();
-    hombre.load('./styles/assets/hombre.obj', function (pin) {
-        pin.traverse(function (child) { child.castShadow = true; })
-        pin.scale.set( 25, 25, 25 )
-        scene.add(pin);
-    });
-}
-
-function mostrarSilla(){
-    const silla = new OBJLoader2();
-    silla.load('./styles/assets/silla.obj', function (pin) {
-        pin.traverse(function (child) { child.castShadow = true; })
-        pin.scale.set( 1, 1, 1 )
-        scene.add(pin);
-    });
-}
-
-function mostrarEdificio(){
-    const edificio = new OBJLoader2();
-    edificio.load('./styles/assets/edificio.obj', function (pin) {
-        pin.traverse(function (child) { child.castShadow = true; })
-        pin.scale.set( 2, 2, 2 )
-        scene.add(pin);
-    });
-}
-
-function mostrarCilindro() {
-    var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
-    var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
-    var cube = new THREE.Mesh(geometry, material);
-    cube.position.y = 5
-    cube.castShadow = true; //default is false
-    cube.receiveShadow = false; //default
-    scene.add(cube);
-}
 
 
 var texture = new THREE.TextureLoader().load('./styles/assets/piso.jpg');
@@ -256,12 +212,76 @@ function enviarInputs() {
     let cambio = false; //la forma de cambiar este valor es undiendo el boton run 
     watchTime(inputDate.value, fecha, cambio);
 
-    //arreglo funcion que muestra objetos
-    let arregloObjetos = [mostrarCilindro(),mostrarHombre(),mostrarSilla(),mostrarEdificio(),mostrarCarro()];
+    
     let objetoInput = document.getElementById("objetos");
-    arregloObjetos[objetoInput.value];
+    if (objetoInput.value == 0) {
+
+        mostrarCilindro();
+
+    } else if (objetoInput.value == 1){
+
+        mostrarHombre();
+
+    } else if (objetoInput.value == 2){
+
+        mostrarSilla();
+
+    } else if (objetoInput.value == 3){
+
+        mostrarEdificio();
+
+    }else {
+
+        mostrarCarro();
+    }
     
     
+}
+
+function mostrarCarro(){
+    const carro = new OBJLoader2();
+    carro.load('./styles/assets/subaru.obj', function (pin) {
+        pin.traverse(function (child) { child.castShadow = true; })
+        pin.scale.set( 12, 12, 12 )
+        scene.add(pin);
+    });
+}
+
+function mostrarHombre(){
+    const hombre = new OBJLoader2();
+    hombre.load('./styles/assets/hombre.obj', function (pin) {
+        pin.traverse(function (child) { child.castShadow = true; })
+        pin.scale.set( 25, 25, 25 )
+        scene.add(pin);
+    });
+}
+
+function mostrarSilla(){
+    const silla = new OBJLoader2();
+    silla.load('./styles/assets/silla.obj', function (pin) {
+        pin.traverse(function (child) { child.castShadow = true; })
+        pin.scale.set( 1, 1, 1 )
+        scene.add(pin);
+    });
+}
+
+function mostrarEdificio(){
+    const edificio = new OBJLoader2();
+    edificio.load('./styles/assets/edificio.obj', function (pin) {
+        pin.traverse(function (child) { child.castShadow = true; })
+        pin.scale.set( 2, 2, 2 )
+        scene.add(pin);
+    });
+}
+
+function mostrarCilindro() {
+    var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
+    var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
+    var cube = new THREE.Mesh(geometry, material);
+    cube.position.y = 5
+    cube.castShadow = true; //default is false
+    cube.receiveShadow = false; //default
+    scene.add(cube);
 }
 
 function correrSimulacion() {
