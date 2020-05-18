@@ -209,7 +209,6 @@ function enviarInputs() {
     directionalLight.intensity=1;
     directionalLight.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio la posicion del objeto de la luz
     sphere.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio posicion de la esfera
-<<<<<<< HEAD
     
     console.log(directionalLight.intensity);
     let cambio = false; //la forma de cambiar este valor es undiendo el boton run 
@@ -263,6 +262,7 @@ function cambiarTiempo(hour,min) {
 
     let cambioMin = min;
     let cambioHour = hour;
+   
 
     if (cambioMin == 30) {
         cambioMin = 0;
@@ -274,8 +274,12 @@ function cambiarTiempo(hour,min) {
         
     }else if(cambioMin < 30 ){
         cambioMin += 30;
-    }else if(cambio > 30){
+
+
+    }else if(cambioMin > 30){
+
         let aux = Math.abs(cambioMin-30);
+        console.log(aux)
         cambioMin = aux;
         cambioHour ++;
     }
