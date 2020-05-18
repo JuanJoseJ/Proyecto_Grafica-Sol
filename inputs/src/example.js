@@ -190,7 +190,7 @@ function enviarInputs() {
     //manejo de errores
     if(document.getElementById("Date").value != "" &&  document.getElementById("Time").value != "" && document.getElementById("LatitudGrados").value != "" 
     && document.getElementById("LongitudGrados").value != ""){
-        console.log(scene.children[scene.children.length-1]);
+        console.log(scene);
 
         let inputDate = document.getElementById("Date");
         let inputTime = document.getElementById("Time");
@@ -253,7 +253,7 @@ function mostrarCarro(){
     const carro = new OBJLoader2();
     carro.load('./styles/assets/subaru.obj', function (pin) {
         pin.traverse(function (child) { child.castShadow = true; })
-        pin.scale.set( 12, 12, 12 )
+        pin.scale.set( 35, 35, 35 )
         scene.add(pin);
     });
 }
@@ -277,7 +277,7 @@ function mostrarSilla(){
     const silla = new OBJLoader2();
     silla.load('./styles/assets/silla.obj', function (pin) {
         pin.traverse(function (child) { child.castShadow = true; })
-        pin.scale.set( 1, 1, 1 )
+        pin.scale.set( 2, 2, 2 )
         scene.add(pin);
     });
 }
@@ -289,7 +289,7 @@ function mostrarEdificio(){
     var edificio = new OBJLoader2();
     edificio.load('./styles/assets/edificio.obj', function (pin) {
         pin.traverse(function (child) { child.castShadow = true; })
-        pin.scale.set( 2, 2, 2 )
+        pin.scale.set( 1, 1, 1 )
         scene.add(pin);
     });
 }
