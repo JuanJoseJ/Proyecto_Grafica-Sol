@@ -128,42 +128,52 @@ function onWindowResize() {
 }
 
 
+function mostrarCarro(){
+    const carro = new OBJLoader2();
+    carro.load('./styles/assets/subaru.obj', function (pin) {
+        pin.traverse(function (child) { child.castShadow = true; })
+        pin.scale.set( 12, 12, 12 )
+        scene.add(pin);
+    });
+}
 
-// const carro = new OBJLoader2();
-// carro.load('./styles/assets/subaru.obj', function (pin) {
-//     pin.traverse(function (child) { child.castShadow = true; })
-//     pin.scale.set( 12, 12, 12 )
-//     scene.add(pin);
-// });
+function mostrarHombre(){
+    const hombre = new OBJLoader2();
+    hombre.load('./styles/assets/hombre.obj', function (pin) {
+        pin.traverse(function (child) { child.castShadow = true; })
+        pin.scale.set( 25, 25, 25 )
+        scene.add(pin);
+    });
+}
 
-// const hombre = new OBJLoader2();
-// hombre.load('./styles/assets/hombre.obj', function (pin) {
-//     pin.traverse(function (child) { child.castShadow = true; })
-//     pin.scale.set( 25, 25, 25 )
-//     scene.add(pin);
-// });
+function mostrarSilla(){
+    const silla = new OBJLoader2();
+    silla.load('./styles/assets/silla.obj', function (pin) {
+        pin.traverse(function (child) { child.castShadow = true; })
+        pin.scale.set( 1, 1, 1 )
+        scene.add(pin);
+    });
+}
 
-// const silla = new OBJLoader2();
-// silla.load('./styles/assets/silla.obj', function (pin) {
-//     pin.traverse(function (child) { child.castShadow = true; })
-//     pin.scale.set( 1, 1, 1 )
-//     scene.add(pin);
-// });
+function mostrarEdificio(){
+    const edificio = new OBJLoader2();
+    edificio.load('./styles/assets/edificio.obj', function (pin) {
+        pin.traverse(function (child) { child.castShadow = true; })
+        pin.scale.set( 2, 2, 2 )
+        scene.add(pin);
+    });
+}
 
-const edificio = new OBJLoader2();
-edificio.load('./styles/assets/edificio.obj', function (pin) {
-    pin.traverse(function (child) { child.castShadow = true; })
-    pin.scale.set( 2, 2, 2 )
-    scene.add(pin);
-});
+function mostrarCilindro() {
+    var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
+    var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
+    var cube = new THREE.Mesh(geometry, material);
+    cube.position.y = 5
+    cube.castShadow = true; //default is false
+    cube.receiveShadow = false; //default
+    scene.add(cube);
+}
 
-// var geometry = new THREE.CylinderGeometry(0, 5, 20, 32);
-// var material = new THREE.MeshLambertMaterial({ color: 0x03adfc });
-// var cube = new THREE.Mesh(geometry, material);
-// cube.position.y = 5
-// cube.castShadow = true; //default is false
-// cube.receiveShadow = false; //default
-// scene.add(cube);
 
 var texture = new THREE.TextureLoader().load('./styles/assets/piso.jpg');
 var texture2 = new THREE.TextureLoader().load('./styles/assets/sol.png');
@@ -244,6 +254,13 @@ function enviarInputs() {
     console.log(directionalLight.intensity);
     let cambio = false; //la forma de cambiar este valor es undiendo el boton run 
     watchTime(inputDate.value, fecha, cambio);
+
+    //arreglo funcion que muestra objetos
+    let arregloObjetos = [mostrarCilindro(),mostrarHombre(),mostrarSilla(),mostrarEdificio(),mostrarCarro()];
+    let objetoInput = document.getElementById("objetos");
+    arregloObjetos[objetoInput.value];
+    
+    
 }
 
 function correrSimulacion() {
@@ -378,3 +395,6 @@ function animarSol(fecha) {
     directionalLight.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio la posicion del objeto de la luz
     sphere.position.set(positionSun[0], positionSun[2], positionSun[1]); //Cambio posicion de la esfera
 }
+
+//intento corregir lo de los modulos
+document.getElementById("set").addEventListener('click',enviarInputs);
