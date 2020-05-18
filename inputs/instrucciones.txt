@@ -1,0 +1,4 @@
+- para correr el codigo debe descargar visual studio code y agregar una extension llamada live server
+- cuando tenga todo instalado debe abrir la carpeta en la que se encuentra el codigo
+- dentro de la carpeta debe dar click derecho al archivo index.htm y ahi seleccionar la opcion de abrir con live server
+NOTA: tener en cuenta que live server por defecto usa el puerto de salida 5500
