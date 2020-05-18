@@ -39,7 +39,6 @@ function coordSol(fecha, lon, lat) {
     let x,y,z,factor; //sen y cos dan un valor entre -1 y 1, factor es para escalar esa distancia
     factor=500; //Hay que ponerle un numero grande
     x=Math.cos(A)*Math.cos(h); //Direccion Norte
-    console.log(A);
     y=Math.sin(A)*Math.cos(h); //Direccion oriente
     z=Math.sin(h); //Altura
 
@@ -62,9 +61,6 @@ function watchTime(ano_mes_dia, fecha, cambio) {
     let min = nuevaFecha.getMinutes();
     let sec = nuevaFecha.getSeconds();
 
-    if (cambio) {
-        min = cambiarTiempo(min);
-    }
 
     hour = mostrarDosDigitos(hour);
     min = mostrarDosDigitos(min);
@@ -72,7 +68,6 @@ function watchTime(ano_mes_dia, fecha, cambio) {
 
     nuevaFecha = new Date(ano_mes_dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
     document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
-    let t = setTimeout(function () { watchTime(ano_mes_dia, nuevaFecha) }, 1000); /* setting timer */
 }
 
 //agrega un 0 a la izquierda a los valores menores de 10
@@ -84,20 +79,6 @@ function mostrarDosDigitos(k) {
     }
 }
 
-//funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
-function cambiarTiempo(min) {
-
-    let cambioMin = min;
-
-    if (cambioMin == 30) {
-        cambioMin = 0;
-    } else {
-        cambioMin += 30;
-    }
-
-    return cambioMin;
-
-}
 
 var scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0xcce0ff, 500, 10000);
@@ -202,7 +183,6 @@ function animate() {
     renderer.render(scene, camera);
     controls.update();
     sphere.rotation.y += 0.01;
-
 }
 
 animate();
@@ -227,8 +207,79 @@ function enviarInputs() {
     directionalLight.intensity=1;
     directionalLight.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio la posicion del objeto de la luz
     sphere.position.set(positionSun[0],positionSun[2],positionSun[1]); //Cambio posicion de la esfera
+    
+    console.log(directionalLight.intensity);
+    let cambio = false; //la forma de cambiar este valor es undiendo el boton run 
+    watchTime(inputDate.value, fecha, cambio);
+}
 
-    let cambio = document.getElementById("run");
-    console.log(cambio.value)
-    watchTime(inputDate.value, fecha, cambio.value);
+function correrSimulacion(){
+
+    let cambio = true;
+    let inputDate = document.getElementById("Date");
+    let inputTime = document.getElementById("Time");
+
+    let inputLatitudGrados = document.getElementById("LatitudGrados");
+
+    let inputLongitudGrados = document.getElementById("LongitudGrados");
+
+    let fecha = new Date(inputDate.value + " " + inputTime.value + ":00 GMT-0500");
+
+    cambioDeHoraMostrando(inputDate.value, fecha, cambio);
+    
+
+}
+
+function cambioDeHoraMostrando(ano_mes_dia, fecha, cambio) {
+
+    let nuevaFecha = fecha;
+    let hour = nuevaFecha.getHours();
+    let min = nuevaFecha.getMinutes();
+    let sec = nuevaFecha.getSeconds();
+
+    console.log(cambio);
+    if (cambio == true) {
+        let arregloTiempo = cambiarTiempo(hour,min);
+        hour = arregloTiempo[0];
+        min = arregloTiempo[1];
+        console.log(hour);
+        console.log(min);
+    }
+
+    hour = mostrarDosDigitos(hour);
+    min = mostrarDosDigitos(min);
+    sec = mostrarDosDigitos(sec);
+
+    nuevaFecha = new Date(ano_mes_dia + " " + hour + ":" + min + ":" + sec + " GMT-0500");
+    document.getElementById("clock").innerHTML = hour + " : " + min + " : " + sec;
+    let t = setTimeout(function () { cambioDeHoraMostrando(ano_mes_dia, nuevaFecha,cambio) }, 1000); /* setting timer */
+}
+
+//funcion que va actualizando el tiempo en este caso quiero que lo haga de a 30 min 
+function cambiarTiempo(hour,min) {
+
+    let cambioMin = min;
+    let cambioHour = hour;
+
+    if (cambioMin == 30) {
+        cambioMin = 0;
+        if(cambioHour === 23){
+            cambioHour = 0;
+        }else{
+            cambioHour ++;
+        }
+        
+    }else if(cambioMin < 30 ){
+        cambioMin += 30;
+    }else if(cambio > 30){
+        let aux = Math.abs(cambioMin-30);
+        cambioMin = aux;
+        cambioHour ++;
+    }
+
+    //final del dia
+  
+
+    return [cambioHour, cambioMin];
+
 }
