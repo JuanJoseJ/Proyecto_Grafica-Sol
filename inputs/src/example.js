@@ -228,9 +228,6 @@ function enviarInputs() {
 
     let inputLongitudGrados = document.getElementById("LongitudGrados");
 
-    let inputGMT = document.getElementById("GMT");
-    console.log(inputGMT.value);
-
     var fecha = new Date(inputDate.value + " " + inputTime.value + " GMT-0000");
     fechaGlobal = fecha;
     console.log(fecha);
